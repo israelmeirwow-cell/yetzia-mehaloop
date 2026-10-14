@@ -64,7 +64,7 @@ export const CONFIG = {
    * The app of יציאה מהלופ (Easy Life): POST /api/site/{site_key}/lead. The key is in the app:
    * הגדרות → שיחות מיפוי → "הקישור לאתר". Empty = the sheet alone (as before).
    */
-  appEndpoint: '',
+  appEndpoint: 'https://server-production-5f04.up.railway.app/api/site/_Hc9BVzRvnAZjdqA_vtxiyyA/lead',
   leadsEndpoint: 'https://script.google.com/macros/s/AKfycbyjMaRoidcgZq-V-BtKyFh3Mh6S0LS2wc5E-f_dElTyQ0iGZbSzq7NYMGhiHUMl3bkkRw/exec',
 }
 
