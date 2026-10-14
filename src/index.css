@@ -1,0 +1,91 @@
+@import 'tailwindcss';
+
+@theme {
+  --font-display: 'Frank Ruhl Libre', 'David', serif;
+  --font-sans: 'Heebo', system-ui, sans-serif;
+  --font-sans-tight: 'Heebo', system-ui, sans-serif;
+  --font-noi: 'Frank Ruhl Libre', serif;
+  --font-mono: 'Heebo', ui-monospace, monospace;
+  --color-cream: #f4efe6;
+  --color-linen: #f4efe6;
+  --color-ink: #0e0d0c;
+  --color-soot: #171513;
+  --color-stone: #d6d2c8;
+  --color-claret: #e0442f;
+  --color-claret-deep: #a8321f;
+  --color-moss: #3f4a3a;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  background: #0e0d0c;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  scroll-behavior: smooth;
+}
+
+html {
+  scrollbar-color: #3a3530 #0e0d0c;
+  scrollbar-width: thin;
+  caret-color: #e0442f;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #0e0d0c;
+}
+::-webkit-scrollbar-thumb {
+  background: #3a3530;
+  border-radius: 999px;
+  border: 2px solid #0e0d0c;
+}
+
+section[id],
+footer[id] {
+  scroll-margin-top: 64px;
+}
+
+::selection {
+  background: #e0442f;
+  color: #f4efe6;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid #e0442f;
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .kenburns {
+    animation: none !important;
+  }
+}
+
+@keyframes kenburns {
+  from {
+    transform: scale(1.12) translate3d(0, 1.5%, 0);
+  }
+  to {
+    transform: scale(1) translate3d(0, 0, 0);
+  }
+}
+
+.kenburns {
+  animation: kenburns 14s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+  will-change: transform;
+}
