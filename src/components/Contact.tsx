@@ -105,15 +105,32 @@ const lineInput =
 type FieldKey = 'name' | 'phone' | 'email'
 const validEmail = (v: string) => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim())
 
+/**
+ * Two copies of every request, sent side by side:
+ * - the app of יציאה מהלופ (CONFIG.appEndpoint): the card for Raz and Levav, the calendar, and
+ *   the "קיבלנו" email to the person;
+ * - the Google Sheet (CONFIG.leadsEndpoint): the backup row and an email to the team. While the
+ *   app is connected, the sheet does not send its own "קיבלנו" (confirm_by_app), so it arrives once.
+ */
 function send(body: Record<string, unknown>) {
-  if (!CONFIG.leadsEndpoint) return
-  fetch(CONFIG.leadsEndpoint, {
-    method: 'POST',
-    mode: 'no-cors',
-    keepalive: true,
-    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-    body: JSON.stringify(body),
-  }).catch(() => {})
+  const json = (extra: Record<string, unknown> = {}) => JSON.stringify({ ...body, ...extra })
+  if (CONFIG.appEndpoint) {
+    fetch(CONFIG.appEndpoint, {
+      method: 'POST',
+      keepalive: true,
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: json(),
+    }).catch(() => {})
+  }
+  if (CONFIG.leadsEndpoint) {
+    fetch(CONFIG.leadsEndpoint, {
+      method: 'POST',
+      mode: 'no-cors',
+      keepalive: true,
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: json({ confirm_by_app: !!CONFIG.appEndpoint }),
+    }).catch(() => {})
+  }
 }
 
 /**

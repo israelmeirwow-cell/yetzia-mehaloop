@@ -60,6 +60,11 @@ export const CONFIG = {
    * Google Apps Script web app (the same one as the workshop page, out_of_the_loop_workshop/apps-script/Code.gs).
    * Every "שיחת מיפוי" form is also saved in its sheet (tab "פניות מהאתר") and emailed to the team.
    */
+  /**
+   * The app of יציאה מהלופ (Easy Life): POST /api/site/{site_key}/lead. The key is in the app:
+   * הגדרות → שיחות מיפוי → "הקישור לאתר". Empty = the sheet alone (as before).
+   */
+  appEndpoint: '',
   leadsEndpoint: 'https://script.google.com/macros/s/AKfycbyjMaRoidcgZq-V-BtKyFh3Mh6S0LS2wc5E-f_dElTyQ0iGZbSzq7NYMGhiHUMl3bkkRw/exec',
 }
 
