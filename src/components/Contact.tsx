@@ -120,7 +120,7 @@ function send(body: Record<string, unknown>) {
  * The "שיחת מיפוי" form: used inside the pop-up (any "שיחת מיפוי" button) and at the bottom of the page.
  * Two ways out: "קביעת שיחה" saves it and emails both sides; "שליחה בווטסאפ" opens WhatsApp with a ready message.
  */
-export function LeadForm({ openedFrom = 'הטופס בתחתית הדף', framed = true, onClose }: { openedFrom?: string; framed?: boolean; onClose?: () => void }) {
+export function LeadForm({ openedFrom = 'כפתור שיחת מיפוי', framed = true, onClose }: { openedFrom?: string; framed?: boolean; onClose?: () => void }) {
   const [name, setName] = useState('')
   const [phone, setPhone] = useState('')
   const [email, setEmail] = useState('')
@@ -335,6 +335,35 @@ export function LeadForm({ openedFrom = 'הטופס בתחתית הדף', framed
   )
 }
 
+/** In place of the form: one button that opens the registration window (ContactModal catches #contact links). */
+function CallCard() {
+  const isMobile = useIsMobile()
+  const arch = isMobile ? ARCH_MOBILE : ARCH
+  return (
+    <div
+      className="relative px-6 pb-9 pt-[92px] text-center text-ink sm:px-10 lg:px-[3vw] lg:pb-[3vw] lg:pt-[118px]"
+      style={{ borderRadius: arch.outer, background: 'linear-gradient(180deg, #f8f4ed 0%, #efe8dc 100%)', boxShadow: '0 40px 100px -30px rgba(0,0,0,0.65)' }}
+    >
+      <span className="pointer-events-none absolute inset-[9px] border border-ink/15" style={{ borderRadius: arch.inner }} aria-hidden="true" />
+      <span className="relative mx-auto flex h-[46px] w-[46px] items-center justify-center rounded-full bg-ink text-linen" aria-hidden="true">
+        <LogoMark size={30} />
+      </span>
+      <h3 className="relative mt-4 font-display text-[34px] leading-[1.05] lg:text-[clamp(34px,2.6vw,46px)]">שיחת מיפוי</h3>
+      <p className="relative mt-2 font-sans text-[15px] text-ink/65">20 דקות · בלי התחייבות</p>
+      <p className="relative mx-auto mt-6 max-w-[34ch] font-display text-[21px] leading-[1.4] text-ink/80">דקה למלא פרטים, ואנחנו חוזרות אליך לתאם. אפשר גם לשלוח לנו הודעה בווטסאפ.</p>
+      <a
+        href="#contact"
+        className="group relative mt-8 flex h-[60px] w-full cursor-pointer items-center justify-center gap-3 rounded-full bg-ink font-sans-tight text-[18px] font-semibold text-linen transition-colors duration-300 hover:bg-claret-deep active:scale-[0.99]"
+      >
+        לתיאום שיחת מיפוי
+        <svg width="20" height="14" viewBox="0 0 20 14" fill="none" className="transition-transform duration-300 group-hover:-translate-x-1" aria-hidden="true">
+          <path d="M19 7H2M7.5 1.5 2 7l5.5 5.5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      </a>
+    </div>
+  )
+}
+
 function Contact() {
   const ref = useRef<HTMLElement>(null)
   const inView = useInView(ref, { once: true, amount: 0.2 })
@@ -374,7 +403,7 @@ function Contact() {
           animate={inView ? { opacity: 1, y: 0 } : undefined}
           transition={{ duration: 0.8, delay: 0.3, ease: 'easeOut' }}
         >
-          <LeadForm />
+          <CallCard />
         </motion.div>
       </div>
     </section>
