@@ -17,6 +17,7 @@ const mentors = [
     photo: import.meta.env.BASE_URL + 'images/raz.jpg',
     position: '54% 22%',
     instagram: { url: CONFIG.instagramUrl, name: 'רז בזק | יוצאות מהלופ' },
+    story: [] as string[],
   },
   {
     name: 'לבב מלכה',
@@ -25,6 +26,11 @@ const mentors = [
     photo: import.meta.env.BASE_URL + 'images/levav.jpg',
     position: '60% 30%',
     instagram: null,
+    // Levav's own words (Israel's WhatsApp note, 16.10.2026)
+    story: [
+      '״היו לי אינסוף רעיונות, וכל אחד מהם הרגיש כמו הדבר הבא שלי. הייתי מתחילה משהו, משקיעה בו, חוקרת ולומדת, ואז פתאום היה צץ רעיון חדש שהלהיב אותי יותר, והייתי עוברת אליו. ככה מצאתי את עצמי קופצת בין כיוונים, מתחילה שוב ושוב, אבל מתקשה להתמיד בדרך אחת ולבנות ממנה משהו אמיתי.',
+      'עד שהבנתי שאני לא צריכה עוד רעיון, אלא את היכולת לבחור כיוון, להתמקד בו ולהתחיל להפוך אותו למציאות. ומשם התפתחה יציאה מהלופ.״',
+    ],
   },
 ]
 
@@ -109,6 +115,29 @@ function Team() {
           <Portrait key={i} mentor={m} index={i} isInView={gridInView} />
         ))}
       </div>
+
+      {mentors
+        .filter((m) => m.story.length > 0)
+        .map((m) => (
+          <motion.figure
+            key={m.name}
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.8, ease: 'easeOut' }}
+            className="m-0 mt-12 grid gap-4 border-t border-ink/30 pt-6 lg:mt-[4vw] lg:grid-cols-[1fr_2fr] lg:gap-[4vw] lg:pt-[2.4vw]"
+          >
+            <figcaption className="font-display text-[26px] leading-[1.1] text-ink sm:text-[clamp(26px,2.3vw,40px)]">
+              {m.name}
+              <span className="mt-1 block font-sans-tight text-[14px] font-medium text-ink/70 sm:text-[15px]">איך הגיעה ליציאה מהלופ</span>
+            </figcaption>
+            <blockquote className="m-0 max-w-[760px] space-y-4 font-sans text-[18px] leading-[1.6] text-ink/80 lg:text-[clamp(18px,1.3vw,24px)]">
+              {m.story.map((para) => (
+                <p key={para}>{para}</p>
+              ))}
+            </blockquote>
+          </motion.figure>
+        ))}
 
       <div className="mt-14 grid gap-8 lg:mt-[5vw] lg:grid-cols-2 lg:gap-[4vw]">
         <div>
