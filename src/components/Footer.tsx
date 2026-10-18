@@ -115,7 +115,7 @@ function MobileFooter() {
           </div>
         </div>
       </div>
-      <p className="mt-10 font-sans-tight text-[14px]">© 2026, יציאה מהלופ</p>
+      <p className="mt-10 font-sans-tight text-[14px]">© 2026, יציאה מהלופ · <a href={`${import.meta.env.BASE_URL}privacy.html`} className="underline underline-offset-4">מדיניות פרטיות</a></p>
       <div className="mt-4 select-none font-display text-[22vw] font-medium leading-[0.95] text-[#e4e0d7]" aria-hidden="true">
         <Wordmark text={WORDMARK} isInView={isInView} slide={120} />
       </div>
@@ -153,7 +153,8 @@ function Footer() {
         </motion.p>
 
         <motion.p {...fadeUp(isInView, 2)} className="absolute font-sans-tight text-[18px] text-ink" style={{ right: 32, top: 351 }}>
-          © 2026, יציאה מהלופ
+          © 2026, יציאה מהלופ ·{' '}
+          <a href={`${import.meta.env.BASE_URL}privacy.html`} className="underline underline-offset-4 hover:text-[#5a554d]">מדיניות פרטיות</a>
         </motion.p>
 
         <div className="absolute" style={{ right: 782, top: 80, width: 347 }}>
